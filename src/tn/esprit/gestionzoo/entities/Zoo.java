@@ -1,15 +1,19 @@
+package tn.esprit.gestionzoo.entities;
+
 public class Zoo {
     static final int NBR_CAGES = 25;   // constante
     Animal[] animals = new Animal[NBR_CAGES];
-    String city;
-    String name;
-    int animalCount = 0;  // combien d’animaux déjà ajoutés
+    protected String city;
+    protected String name;
+    protected int animalCount = 0;  // combien d’animaux déjà ajoutés
 
     public Zoo(String name, String city) {
         this.name = name;
         this.city = city;
     }
-
+    public boolean isZooFull() {
+        return animalCount == NBR_CAGES;
+    }
     // Ajouter un animal unique
     public boolean addAnimal(Animal animal) {
         // Vérifier si déjà présent
@@ -18,13 +22,12 @@ public class Zoo {
                 System.out.println(" L’animal " + animal.name + " existe déjà !");
                 return false;
             }
+            if(isZooFull()){
+                System.out.println("le zoo est plein");
+            }
         }
 
         // Vérifier si zoo plein
-        if (animalCount >= NBR_CAGES) {
-            System.out.println(" Le zoo est plein !");
-            return false;
-        }
 
         // Ajouter l’animal
         animals[animalCount] = animal;
@@ -32,10 +35,9 @@ public class Zoo {
         System.out.println(" L’animal " + animal.name + " a été ajouté au zoo !");
         return true;
     }
-
     // Afficher le zoo
     public void displayZoo() {
-        System.out.println("Zoo: " + name + " à " + city);
+        System.out.println("tn.esprit.gestionzoo.entities.Zoo: " + name + " à " + city);
         System.out.println("Animaux présents (" + animalCount + "/" + NBR_CAGES + "):");
         for (int i = 0; i < animalCount; i++) {
             System.out.println(" - " + animals[i]);
@@ -69,9 +71,7 @@ public class Zoo {
         return false; // pas trouvé
     }
 
-    public boolean isZooFull() {
-        return animalCount == NBR_CAGES;
-    }
+
     public static Zoo compareZoo(Zoo z1, Zoo z2) {
         if (z1.animalCount > z2.animalCount) {
             return z1;
@@ -82,5 +82,36 @@ public class Zoo {
             return null; // égalité
         }
     }
+    //getter setter
+    public void setName(String name){
+        if(name==null){
+            System.out.println("le nom ne doit pas etre vide ");
+        }
+        this.name = name;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAnimalCount() {
+        return animalCount;
+    }
+
+    public void setAnimalCount(int animalCount) {
+        this.animalCount = animalCount;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public static int getNbrCages() {
+        return NBR_CAGES;
+    }
+
+
+    public String getCity() {
+        return city;
+    }
 }

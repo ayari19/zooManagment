@@ -1,4 +1,7 @@
-import java.awt.desktop.SystemEventListener;
+package tn.esprit.gestionzoo.main;
+
+import tn.esprit.gestionzoo.entities.Animal;
+import tn.esprit.gestionzoo.entities.Zoo;
 
 public class ZooManagement {
     public static void main(String[] args) {
@@ -11,6 +14,7 @@ public class ZooManagement {
         Animal tigre = new Animal("Feline", "Tigre", 4, true);
         Animal brebie = new Animal("Ovin", "Brebie", 3, true);
         Animal tigre1 = new Animal("Feline", "Tigre", 4, true);
+        Animal luna = new Animal("chat", "luna", 3, true);
 
         System.out.println(myZoo.addAnimal(lion));
         System.out.println(myZoo.addAnimal(cheval));
@@ -18,8 +22,8 @@ public class ZooManagement {
         System.out.println(myZoo.addAnimal(tigre1));
         System.out.println( myZoo.addAnimal(tigre1)); // existe deja
         System .out.println(myZoo.removeAnimal(tigre1));
-        System.out.println("Zoo plein ? " + myZoo.isZooFull());
-
+        System.out.println("tn.esprit.gestionzoo.entities.Zoo plein ? " + myZoo.isZooFull());
+        zoo1.addAnimal(luna);
         zoo1.addAnimal(lion);
         zoo1.addAnimal(tigre);
         Zoo plusGrand = Zoo.compareZoo(zoo1, zoo2);
