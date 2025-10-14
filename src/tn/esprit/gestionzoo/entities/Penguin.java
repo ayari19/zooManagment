@@ -10,6 +10,10 @@ public class Penguin extends Aquatique{
     @Override
     public String toString() {
         return super.toString() + ", habit='" + habit +"SwimingPath"+swimmingDepth;};
+
+    public float getSwimmingDepth() {
+        return swimmingDepth;
     }
+}
 
 

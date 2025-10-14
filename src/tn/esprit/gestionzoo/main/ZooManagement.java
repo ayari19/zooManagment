@@ -36,15 +36,18 @@ public class ZooManagement {
         Terrestre chat = new Terrestre("Fifa", "chat", 5, true, 4);
         System.out.println(chat);
         Aquatique a1 = new Aquatique("FishFamily", "Poisson", 1, false,"mer");
-
         Dolphin d1 = new Dolphin("Delphinidae", "Flipper", 5, true, "Ocean", 25.5f);
         Penguin p1 = new Penguin("Spheniscidae", "Pingu", 3, false, "Antarctique", 10.2f);
-
         System.out.println(d1);
         System.out.println(p1);
+
         // ==============================================================
         a1.swim();
         d1.swim();
         p1.swim();
+        zoo1.maxPenguinSwimmingDepth();
+        myZoo.displayNumberOfAquaticsByType();
+
+
     }
 }
