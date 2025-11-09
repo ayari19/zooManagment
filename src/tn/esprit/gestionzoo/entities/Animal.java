@@ -15,6 +15,10 @@ public class Animal {
         this.isMammal = isMammal;
     }
 
+    public Animal() {
+
+    }
+
     // ✅ Affichage simple
     public void displayAnimal() {
         System.out.println("Animal: " + name +
