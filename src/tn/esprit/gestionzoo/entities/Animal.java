@@ -1,20 +1,23 @@
 package tn.esprit.gestionzoo.entities;
 
 public class Animal {
-    protected String family;
-    protected String name;
-    protected int age;
-    protected boolean isMammal; // bool primitif (pas Boolean)
+    // ✅ Données privées (encapsulation)
+    private String family;
+    private String name;
+    private int age;
+    private boolean isMammal;
 
+    // ✅ Constructeur : valide l’âge via setAge()
     public Animal(String family, String name, int age, boolean isMammal) {
         this.family = family;
         this.name = name;
-        this.age = age;
+        setAge(age);           // validation ici
         this.isMammal = isMammal;
     }
 
+    // ✅ Affichage simple
     public void displayAnimal() {
-        System.out.println("tn.esprit.gestionzoo.entities.Animal: " + name +
+        System.out.println("Animal: " + name +
                 ", famille: " + family +
                 ", âge: " + age +
                 ", mammifère: " + isMammal);
@@ -23,37 +26,29 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "tn.esprit.gestionzoo.entities.Animal{name='" + name + "', family='" + family +
+        return "Animal{name='" + name + "', family='" + family +
                 "', age=" + age + ", isMammal=" + isMammal + "}";
     }
-    //getter et setter
-    public void setAge(int age){
-        if(age<0){
-            System.out.println("l'age ne doit pas etre negartive");
+
+    // ===================== Getters / Setters =====================
+
+    public int getAge() { return age; }
+
+    public void setAge(int age) {
+        if (age < 0) {
+            throw new InvalidAgeException("L'âge ne doit pas être négatif");
         }
-        this.age=age;
-    }
-    public int getAge(){
-        return this.age;
-    }
-    public void setName(String name){
-        this.name=name;
-    }
-    public String getName(){
-        return this.name;
-    }
-    public void setFamily(String Family){
-        this.family=Family;
-    }
-    public String getFamily(){
-        return this.family;
+        this.age = age;
     }
 
-    public void setMammal(boolean mammal) {
-        isMammal = mammal;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public boolean isMammal() {
-        return isMammal;
-    }
+    public String getFamily() { return family; }
+    public void setFamily(String family) { this.family = family; }
+
+    public boolean isMammal() { return isMammal; }
+    public void setMammal(boolean mammal) { isMammal = mammal; }
+
+
 }

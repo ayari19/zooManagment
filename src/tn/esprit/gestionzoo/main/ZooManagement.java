@@ -2,35 +2,53 @@ package tn.esprit.gestionzoo.main;
 
 import tn.esprit.gestionzoo.entities.Animal;
 import tn.esprit.gestionzoo.entities.Zoo;
+import tn.esprit.gestionzoo.entities.ZooFullException;
 
 public class ZooManagement {
+
     public static void main(String[] args) {
         Zoo myZoo = new Zoo("MyZoo", "Sousse");
-        Zoo zoo1 = new Zoo("zootest", "tunis");
-        Zoo zoo2 = new Zoo("belvidaire", "tunis");
+        Zoo zoo1  = new Zoo("zootest", "tunis");
+        Zoo zoo2  = new Zoo("belvidaire", "tunis");
 
-        Animal lion = new Animal("Feline", "Lion", 5, true);
+        Animal lion   = new Animal("Feline", "Lion", 5, true);
         Animal cheval = new Animal("Equide", "Cheval", 2, false);
-        Animal tigre = new Animal("Feline", "Tigre", 4, true);
+        Animal tigre  = new Animal("Feline", "Tigre", 4, true);
         Animal brebie = new Animal("Ovin", "Brebie", 3, true);
         Animal tigre1 = new Animal("Feline", "Tigre", 4, true);
-        Animal luna = new Animal("chat", "luna", 3, true);
+        Animal luna   = new Animal("chat", "luna", 3, true);
 
-        System.out.println(myZoo.addAnimal(lion));
-        System.out.println(myZoo.addAnimal(cheval));
-        System.out.println(myZoo.addAnimal(tigre));
-        System.out.println(myZoo.addAnimal(tigre1));
-        System.out.println( myZoo.addAnimal(tigre1)); // existe deja
-        System .out.println(myZoo.removeAnimal(tigre1));
-        System.out.println("tn.esprit.gestionzoo.entities.Zoo plein ? " + myZoo.isZooFull());
-        zoo1.addAnimal(luna);
-        zoo1.addAnimal(lion);
-        zoo1.addAnimal(tigre);
+        // === Ajouts dans myZoo (avec gestion des exceptions) ===
+        tryAddAndReport(myZoo, lion);
+        tryAddAndReport(myZoo, cheval);
+        tryAddAndReport(myZoo, tigre);
+        tryAddAndReport(myZoo, brebie); // ❌ zoo plein ici
+
+        System.out.println(myZoo.removeAnimal(tigre1));
+        System.out.println("Zoo plein ? " + myZoo.isZooFull());
+
+        // === Ajouts dans zoo1 ===
+        tryAddAndReport(zoo1, luna);
+        tryAddAndReport(zoo1, lion);
+        tryAddAndReport(zoo1, tigre);
+
+        // === Comparaison des deux zoos ===
         Zoo plusGrand = Zoo.compareZoo(zoo1, zoo2);
-
         if (plusGrand != null) {
-            System.out.println(" Le zoo avec le plus d’animaux est : " + plusGrand.name);
+            System.out.println("🏆 Le zoo avec le plus d’animaux est : " + plusGrand.getName());
         }
-        /*myZoo.displayZoo();*/
+
+        // Affichage du contenu de myZoo
+        myZoo.displayZoo();
+    }
+    private static void tryAddAndReport(Zoo zoo, Animal animal) {
+        try {
+            zoo.addAnimal(animal); // addAnimal peut lancer ZooFullException
+        } catch (ZooFullException e) {
+            System.err.println("❌ " + e.getMessage());
+        } finally {
+            System.out.println("Nombre d’animaux dans " + zoo.getName() + " : " + zoo.getAnimalCount());
+            System.out.println("----");
+        }
     }
 }
